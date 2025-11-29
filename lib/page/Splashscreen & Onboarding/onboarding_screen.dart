@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:motion_apps/page/Homepage & Flow Utama/home_page.dart';
+import 'package:motion_apps/page/Homepage%20&%20Flow Utama/home_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -28,7 +28,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     {
       "image": "assets/image 3.png",
       "title": "Belanja Starter Kit & Jual Hasil Panen!",
-      "desc": "Belanja, jual panen, dan penuhi kebutuhanmu di marketplace kami. Praktis banget buat kamu \nyang suka berkebun dari rumah!"
+      "desc": "Belanja, jual panen, dan penuhi kebutuhanmu di marketplace kami. Praktis banget buat kamu yang suka berkebun dari rumah!"
     },
   ];
 
@@ -94,42 +94,46 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               clipper: CurvedTopClipper(),
               child: Container(
                 color: darkGreen,
-                padding: const EdgeInsets.fromLTRB(30, 100, 30, 100), 
+                padding: const EdgeInsets.fromLTRB(30, 100, 30, 100),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Teks Judul & Deskripsi
-                    Column(
-                      children: [
-                        Text(
-                          _onboardingData[_currentIndex]['title']!,
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.plusJakartaSans(
-                            color: Colors.white,
-                            fontSize: 28,
-                            fontWeight: FontWeight.w700,
-                            height: 1.2,
-                          ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Text(
+                              _onboardingData[_currentIndex]['title']!,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.plusJakartaSans(
+                                color: Colors.white,
+                                fontSize: 28,
+                                fontWeight: FontWeight.w700,
+                                height: 1.2,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              _onboardingData[_currentIndex]['desc']!,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.plusJakartaSans(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                height: 1.6,
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 16),
-                        Text(
-                          _onboardingData[_currentIndex]['desc']!,
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.plusJakartaSans(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            height: 1.6,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
+                    
+                    const SizedBox(height: 20),
 
-                    // Navigasi Dots & Tombol
+                    //Tombol Back
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Tombol Back
                         _currentIndex > 0
                             ? _buildArrowButton(
                                 icon: Icons.arrow_back,
@@ -141,8 +145,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 },
                               )
                             : const SizedBox(width: 42, height: 42),
-
-                        //2 Dots
+                        //Dots
                         Row(
                           children: List.generate(
                             _onboardingData.length,
@@ -161,8 +164,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             },
                           ),
                         ),
-
-                        // Tombol Next
+                        //Tombol Next
                         _buildArrowButton(
                           icon: Icons.arrow_forward,
                           onTap: _nextPage,
