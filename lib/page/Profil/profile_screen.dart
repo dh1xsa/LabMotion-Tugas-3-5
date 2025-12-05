@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:motion_apps/page/Profil/edit_profile_screen.dart';
+import 'package:motion_apps/page/Profil/status_pesanan.dart';
 import 'package:unicons/unicons.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -108,13 +110,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   right: 25,
                   top: 60,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const EditProfileScreen()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF18C39F),
                       padding: const EdgeInsets.symmetric(
                         horizontal: 14,
-                          vertical: 12,
-                      ), // DIPERKECIL
+                        vertical: 12,
+                      ),
                       minimumSize: const Size(20, 32),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -160,6 +169,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+
   Widget _buildCardStatus() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -198,15 +208,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+
+  /// 🤝 DIBUAT BISA DIKLIK
   Widget _statusItem(String title, String iconPath) {
-    return Column(
-      children: [
-        Image.asset(iconPath, width: 45),
-        const SizedBox(height: 8),
-        Text(title, style: const TextStyle(fontSize: 14)),
-      ],
+    return InkWell(
+      borderRadius: BorderRadius.circular(16),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => StatusPesananScreen(status: title),
+          ),
+        );
+      },
+      child: Column(
+        children: [
+          Image.asset(iconPath, width: 45),
+          const SizedBox(height: 8),
+          Text(title, style: const TextStyle(fontSize: 14)),
+        ],
+      ),
     );
   }
+
   Widget _buildMenuCard({
     required String title,
     String? iconPath,
@@ -249,8 +273,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
 
-          Icon(Icons.arrow_forward_ios,
-              size: 20, color: trailingColor),
+          Icon(Icons.arrow_forward_ios, size: 20, color: trailingColor),
         ],
       ),
     );

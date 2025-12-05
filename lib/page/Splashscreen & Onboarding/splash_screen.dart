@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:motion_apps/page/Splashscreen%20&%20Onboarding/onboarding_screen.dart';
+import 'package:motion_apps/page/Splashscreen & Onboarding/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,20 +11,26 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 2), () { // Timer 2 detik
+
+    Timer(const Duration(seconds: 3), () {
+      if (!mounted) return;
+
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const OnboardingScreen()),
+        MaterialPageRoute(
+          builder: (_) => const OnboardingScreen(),
+        ),
       );
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final Color brandColor = const Color(0xFF179778);
+    const Color brandColor = Color(0xFF179778);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -33,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/logo.png', 
+              'lib/assets/logo.png',
               width: 100,
               height: 104,
             ),
@@ -44,7 +50,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 fontSize: 28,
                 fontWeight: FontWeight.w700,
                 color: brandColor,
-                height: 1.2,
               ),
             ),
             Text(
@@ -54,7 +59,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 fontWeight: FontWeight.w400,
                 fontStyle: FontStyle.italic,
                 color: brandColor,
-                height: 1.6,
               ),
             ),
           ],
