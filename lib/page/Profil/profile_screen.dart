@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:motion_apps/page/Homepage%20&%20Flow%20Utama/home_page.dart';
 import 'package:motion_apps/page/Pantau%20Tanaman/plant_monitoring_screen.dart';
-import 'package:motion_apps/page/Personalisasi%20User/personalization_screen.dart'; // Import Personalisasi
+import 'package:motion_apps/page/Personalisasi%20User/personalization_screen.dart'; 
 import 'package:motion_apps/page/Profil/edit_profile_screen.dart';
 import 'package:motion_apps/page/Profil/status_pesanan.dart';
 import 'package:unicons/unicons.dart';
@@ -14,11 +14,10 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  int currentIndex = 3; // Index 3 adalah Profil
+  int currentIndex = 3;
 
-  // --- LOGIKA NAVIGASI BAWAH ---
   void _onItemTapped(int index) {
-    if (index == 3) return; // Jika sudah di Profil, tidak perlu reload
+    if (index == 3) return; 
 
     switch (index) {
       case 0:
@@ -34,7 +33,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         );
         break;
       case 2:
-        // Marketplace tidak ada aksi (sesuai request sebelumnya)
         break;
     }
   }
@@ -63,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           currentIndex: currentIndex,
           selectedItemColor: const Color(0xFF009F7F),
           unselectedItemColor: Colors.grey,
-          onTap: _onItemTapped, // Pasang fungsi navigasi disini
+          onTap: _onItemTapped,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(UniconsLine.estate),
@@ -279,7 +277,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  // UPDATE: Menambahkan parameter onTap
   Widget _buildMenuCard({
     required String title,
     String? iconPath,
@@ -288,9 +285,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Color textColor = Colors.black,
     Color trailingColor = Colors.black,
     Color iconColor = Colors.black,
-    VoidCallback? onTap, // Parameter baru untuk aksi klik
+    VoidCallback? onTap,
   }) {
-    return InkWell( // Bungkus dengan InkWell atau GestureDetector
+    return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(26),
       child: Container(
