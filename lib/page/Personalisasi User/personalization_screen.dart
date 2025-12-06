@@ -68,14 +68,7 @@ class _PersonalisasiPageState extends State<PersonalisasiPage> {
                             ),
                           ),
                         ),
-                        // const Text(
-                        //   "1/3",
-                        //   style: TextStyle(
-                        //     color: Colors.white,
-                        //     fontSize: 16,
-                        //     fontWeight: FontWeight.w500,
-                        //   ),
-                        // ),
+
                         GestureDetector(
                           onTap: () {
                             Navigator.push(

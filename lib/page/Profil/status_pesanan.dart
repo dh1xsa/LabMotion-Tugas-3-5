@@ -72,7 +72,7 @@ class _StatusPesananScreenState extends State<StatusPesananScreen> {
             Expanded(
               child: ListView(
                 children: [
-                  _buildOrderCard(), // nanti bisa di-list data
+                  _buildOrderCard(),
                 ],
               ),
             )
@@ -82,7 +82,7 @@ class _StatusPesananScreenState extends State<StatusPesananScreen> {
     );
   }
 
-  /// 🟩 TAB STATUS ITEM
+  /// TAB STATUS ITEM
   Widget _buildTab(String title) {
     bool isActive = selectedTab == title;
 

@@ -48,10 +48,6 @@ class _PersonalisasiLuasPageState extends State<PersonalisasiLuasPage> {
                           child: const Icon(Icons.arrow_back, color: Colors.white),
                         ),
                       ),
-                      // const Text(
-                      //   "3/3",
-                      //   style: TextStyle(color: Colors.white, fontSize: 16),
-                      // ),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                         decoration: BoxDecoration(
@@ -86,7 +82,7 @@ class _PersonalisasiLuasPageState extends State<PersonalisasiLuasPage> {
                         _buildAreaOption(
                           value: 0,
                           label: "< 1 m²",
-                          imagePath: "assets/greenStack.png",
+                          imagePath: "lib/assets/greenStack.png",
                           imgWidth: 55,
                           imgHeight: 55,
                         ),
@@ -95,7 +91,7 @@ class _PersonalisasiLuasPageState extends State<PersonalisasiLuasPage> {
                         _buildAreaOption(
                           value: 1,
                           label: "1–3 m²",
-                          imagePath: "assets/greenStack.png",
+                          imagePath: "lib/assets/greenStack.png",
                           imgWidth: 90,
                           imgHeight: 90,
                         ),
@@ -104,7 +100,7 @@ class _PersonalisasiLuasPageState extends State<PersonalisasiLuasPage> {
                         _buildAreaOption(
                           value: 2,
                           label: "> 3 m²",
-                          imagePath: "assets/greenStack.png",
+                          imagePath: "lib/assets/greenStack.png",
                           imgWidth: 130,
                           imgHeight: 130,
                         ),
@@ -118,7 +114,6 @@ class _PersonalisasiLuasPageState extends State<PersonalisasiLuasPage> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Tambahkan navigasi ke Home dan hapus history route sebelumnya agar tidak bisa back
                         Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
                       },
                       style: ElevatedButton.styleFrom(

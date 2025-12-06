@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:motion_apps/models/plant.dart';
 import 'package:unicons/unicons.dart';
+import 'package:motion_apps/page/Homepage%20&%20Flow%20Utama/flow_utama.dart';
 
 class PlantTaskScreen extends StatefulWidget {
   final Plant plant;
@@ -341,7 +342,14 @@ class _PlantTaskScreenState extends State<PlantTaskScreen> {
                             width: double.infinity,
                             height: 54,
                             child: OutlinedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                  builder: (context) => PlantDetailScreen(plant: widget.plant),
+                                  ),
+                                );
+                              },
                               style: OutlinedButton.styleFrom(
                                 side: const BorderSide(color: Color(0xFF009F7F)),
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),

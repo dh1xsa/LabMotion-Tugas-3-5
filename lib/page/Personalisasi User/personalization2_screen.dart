@@ -254,7 +254,7 @@ class _Personalisasi2PageState extends State<Personalisasi2Page> {
     );
   }
 
-  // 🔹 RADIO BUILDER (SUDAH DIREVISI)
+  // 🔹 RADIO BUILDER
   Widget _buildRadioOption({
     required int value,
     required String label,

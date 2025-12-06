@@ -116,7 +116,6 @@ class _LoginPageState extends State<LoginPage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Ubah ke Home
                     Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
                   },
                   style: ElevatedButton.styleFrom(
