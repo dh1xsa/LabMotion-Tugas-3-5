@@ -1,15 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:motion_apps/models/kit.dart';
 import 'package:motion_apps/models/plant.dart';
+// Import halaman tujuan
 import 'package:motion_apps/page/Profil/profile_screen.dart';
+import 'package:motion_apps/page/Pantau Tanaman/plant_monitoring_screen.dart';
 import 'package:motion_apps/widget/kit_card.dart';
 import 'package:motion_apps/widget/plant_card.dart';
 import 'package:motion_apps/widget/timer_widget.dart';
 import 'package:unicons/unicons.dart';
 
-
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0; 
+
+  void _onItemTapped(int index) {
+    if (index == 2) return;
+
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    switch (index) {
+      case 0:
+        break;
+      case 1:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const PlantMonitoringScreen()),
+        ).then((_) {
+          setState(() => _selectedIndex = 0);
+        });
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ProfileScreen()),
+        ).then((_) {
+          setState(() => _selectedIndex = 0);
+        });
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +115,7 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
+            // --- HEADER HIJAU & GREETING ---
             SliverToBoxAdapter(
               child: Stack(
                 clipBehavior: Clip.none,
@@ -107,7 +145,7 @@ class HomePage extends StatelessWidget {
                                 letterSpacing: 0.3,
                               ),
                             ),
-
+                            // Navigasi ke Profil lewat Avatar
                             GestureDetector(
                               onTap: () {
                                 Navigator.push(
@@ -122,7 +160,6 @@ class HomePage extends StatelessWidget {
                             ),
                           ],
                         ),
-
                         const Text(
                           'Berkebun Apa Hari Ini?',
                           style: TextStyle(
@@ -131,12 +168,10 @@ class HomePage extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-
                         const SizedBox(height: 24),
                       ],
                     ),
                   ),
-
                   Positioned(
                     bottom: -55,
                     left: 20,
@@ -192,6 +227,7 @@ class HomePage extends StatelessWidget {
 
             const SliverToBoxAdapter(child: SizedBox(height: 80)),
 
+            // SEARCH BAR
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
@@ -211,6 +247,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
 
+            // GRID VIEW (REKOMENDASI)
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 8),
@@ -247,7 +284,7 @@ class HomePage extends StatelessWidget {
                   childAspectRatio: 0.75,
                 ),
                 delegate: SliverChildBuilderDelegate(
-                      (context, index) {
+                  (context, index) {
                     return PlantCard(plant: plants[index]);
                   },
                   childCount: plants.length,
@@ -255,6 +292,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
 
+            // FLASH SALE LIST
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
@@ -295,45 +333,49 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 8,
-                offset: Offset(0, -2),
-              ),
-            ],
-          ),
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.white,
-            elevation: 0,
-            selectedItemColor: Color(0xFF009F7F),
-            unselectedItemColor: Colors.grey,
-            showSelectedLabels: true,
-            showUnselectedLabels: true,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(UniconsLine.estate),
-                label: "Beranda",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(UniconsLine.flower),
-                label: "Pantau Tanaman",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(UniconsLine.shopping_bag),
-                label: "Marketplace",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(UniconsLine.user_circle),
-                label: "Profil",
-              ),
-            ],
-          ),
+      
+      // NAVBAR
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 8,
+              offset: const Offset(0, -2),
+            ),
+          ],
         ),
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          selectedItemColor: const Color(0xFF009F7F),
+          unselectedItemColor: Colors.grey,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,      
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(UniconsLine.estate),
+              label: "Beranda",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(UniconsLine.flower),
+              label: "Pantau Tanaman",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(UniconsLine.shopping_bag),
+              label: "Marketplace",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(UniconsLine.user_circle),
+              label: "Profil",
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

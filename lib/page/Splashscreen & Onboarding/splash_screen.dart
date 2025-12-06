@@ -43,7 +43,6 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 100,
               height: 104,
             ),
-            const SizedBox(height: 16),
             Text(
               "HydropoMe",
               style: GoogleFonts.plusJakartaSans(
