@@ -23,7 +23,6 @@ class PlantCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // IMAGE
           ClipRRect(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(16),
@@ -66,7 +65,9 @@ class PlantCard extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
+
                     const Spacer(),
+
                     const Icon(Icons.access_time, size: 14, color: Colors.grey),
                     const SizedBox(width: 4),
                     Text(
