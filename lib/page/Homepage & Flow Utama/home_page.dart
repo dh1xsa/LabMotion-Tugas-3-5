@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:motion_apps/models/kit.dart';
 import 'package:motion_apps/models/plant.dart';
-// Import halaman tujuan
 import 'package:motion_apps/page/Profil/profile_screen.dart';
-import 'package:motion_apps/page/Pantau Tanaman/plant_monitoring_screen.dart';
 import 'package:motion_apps/widget/kit_card.dart';
 import 'package:motion_apps/widget/plant_card.dart';
 import 'package:motion_apps/widget/timer_widget.dart';
 import 'package:unicons/unicons.dart';
+import 'package:motion_apps/page/Pantau Tanaman/plant_monitoring_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -247,7 +246,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
-            // GRID VIEW (REKOMENDASI)
+            // GRID VIEW 
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 8),
