@@ -116,7 +116,8 @@ class _LoginPageState extends State<LoginPage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/register');
+                    // Ubah ke Home
+                    Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kNormal,

@@ -117,7 +117,10 @@ class _PersonalisasiLuasPageState extends State<PersonalisasiLuasPage> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Tambahkan navigasi ke Home dan hapus history route sebelumnya agar tidak bisa back
+                        Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF179C79),
                         padding: const EdgeInsets.symmetric(vertical: 14),

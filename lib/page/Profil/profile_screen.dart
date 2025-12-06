@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:motion_apps/page/Homepage%20&%20Flow%20Utama/home_page.dart';
+import 'package:motion_apps/page/Pantau%20Tanaman/plant_monitoring_screen.dart';
+import 'package:motion_apps/page/Personalisasi%20User/personalization_screen.dart'; // Import Personalisasi
 import 'package:motion_apps/page/Profil/edit_profile_screen.dart';
 import 'package:motion_apps/page/Profil/status_pesanan.dart';
 import 'package:unicons/unicons.dart';
@@ -11,7 +14,30 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  int currentIndex = 3;
+  int currentIndex = 3; // Index 3 adalah Profil
+
+  // --- LOGIKA NAVIGASI BAWAH ---
+  void _onItemTapped(int index) {
+    if (index == 3) return; // Jika sudah di Profil, tidak perlu reload
+
+    switch (index) {
+      case 0:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+        break;
+      case 1:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const PlantMonitoringScreen()),
+        );
+        break;
+      case 2:
+        // Marketplace tidak ada aksi (sesuai request sebelumnya)
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,31 +45,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: Colors.grey[100],
 
       // ============= BOTTOM NAVIGATION =============
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        currentIndex: currentIndex,
-        selectedItemColor: const Color(0xFF009F7F),
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(UniconsLine.estate),
-            label: "Beranda",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(UniconsLine.flower),
-            label: "Pantau Tanaman",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(UniconsLine.shopping_bag),
-            label: "Marketplace",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(UniconsLine.user_circle),
-            label: "Profil",
-          ),
-        ],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, -2),
+            ),
+          ],
+        ),
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          currentIndex: currentIndex,
+          selectedItemColor: const Color(0xFF009F7F),
+          unselectedItemColor: Colors.grey,
+          onTap: _onItemTapped, // Pasang fungsi navigasi disini
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(UniconsLine.estate),
+              label: "Beranda",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(UniconsLine.flower),
+              label: "Pantau Tanaman",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(UniconsLine.shopping_bag),
+              label: "Marketplace",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(UniconsLine.user_circle),
+              label: "Profil",
+            ),
+          ],
+        ),
       ),
 
       // ============= BODY =============
@@ -77,7 +116,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: const CircleAvatar(
                           radius: 32,
                           backgroundImage:
-                          AssetImage("lib/assets/Memoji Girls.png"),
+                              AssetImage("lib/assets/Memoji Girls.png"),
                         ),
                       ),
                       const SizedBox(width: 18),
@@ -114,8 +153,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                            const EditProfileScreen()),
+                            builder: (context) => const EditProfileScreen()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -146,21 +184,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _buildCardStatus(),
 
             const SizedBox(height: 20),
+            
+            // --- MENU PERSONALISASI (DIBERI AKSI NAVIGASI) ---
             _buildMenuCard(
               title: "Personalisasi",
               iconPath: "lib/assets/Vector.png",
               iconSize: 28,
               textColor: Colors.black,
               trailingColor: Colors.black,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PersonalisasiPage()),
+                );
+              },
             ),
 
             const SizedBox(height: 20),
+            
             _buildMenuCard(
               title: "Logout",
               icon: Icons.logout,
               iconColor: Colors.red,
               textColor: Colors.red,
               trailingColor: Colors.red,
+              onTap: () {
+                // Tambahkan logika logout jika perlu, misalnya kembali ke Login
+                Navigator.pushReplacementNamed(context, '/login');
+              }
             ),
 
             const SizedBox(height: 40),
@@ -209,7 +261,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  /// 🤝 DIBUAT BISA DIKLIK
   Widget _statusItem(String title, String iconPath) {
     return InkWell(
       borderRadius: BorderRadius.circular(16),
@@ -231,6 +282,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  // UPDATE: Menambahkan parameter onTap
   Widget _buildMenuCard({
     required String title,
     String? iconPath,
@@ -239,42 +291,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Color textColor = Colors.black,
     Color trailingColor = Colors.black,
     Color iconColor = Colors.black,
+    VoidCallback? onTap, // Parameter baru untuk aksi klik
   }) {
-    return Container(
-      height: 80,
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(26),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          iconPath != null
-              ? Image.asset(iconPath, width: iconSize)
-              : Icon(icon, size: iconSize, color: iconColor),
-
-          const SizedBox(width: 18),
-          Expanded(
-            child: Text(
-              title,
-              style: TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.w600,
-                color: textColor,
+    return InkWell( // Bungkus dengan InkWell atau GestureDetector
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(26),
+      child: Container(
+        height: 80,
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(26),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            iconPath != null
+                ? Image.asset(iconPath, width: iconSize)
+                : Icon(icon, size: iconSize, color: iconColor),
+      
+            const SizedBox(width: 18),
+            Expanded(
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w600,
+                  color: textColor,
+                ),
               ),
             ),
-          ),
-
-          Icon(Icons.arrow_forward_ios, size: 20, color: trailingColor),
-        ],
+      
+            Icon(Icons.arrow_forward_ios, size: 20, color: trailingColor),
+          ],
+        ),
       ),
     );
   }
